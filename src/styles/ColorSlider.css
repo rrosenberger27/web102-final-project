@@ -1,0 +1,18 @@
+.color-slider-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.color-slider-label {
+    font-size: 1.4rem;
+    color: #ecf0f1;
+}
+
+.color-slider-input {
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+}

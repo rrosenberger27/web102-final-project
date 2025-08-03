@@ -1,0 +1,18 @@
+.example-color-card {
+    width: 400px;
+    height: 200px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.example-color-card h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    padding-top: 20px;
+}
+
+.example-color-card p {
+    font-size: 1.2rem;
+    padding-left: 20px;
+    padding-right: 20px;
+}

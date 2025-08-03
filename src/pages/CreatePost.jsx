@@ -1,0 +1,85 @@
+import React from 'react'
+import { useState } from 'react'
+import { supabase } from '../client'
+import ColorSlider from '../components/ColorSlider'
+import { useNavigate } from 'react-router'
+import Loading from '../components/Loading'
+import '../styles/CreatePost.css'
+import ExampleColorCard from '../components/ExampleColorCard'
+
+const CreatePost = () => {
+  const [post, setPost] = useState({
+    title: '',
+    content: '',
+    video_url: '',
+    project_title: '',
+    category: 'movie',
+    release_year: '',
+    release_month: '',
+    background_color: '#000000',
+    text_color: '#ffffff',
+    img_url: '',
+  })
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    if (!post.title || !post.project_title) {
+      alert('Please make sure the title and project title are filled in.')
+      return
+    }
+
+    setLoading(true)
+    
+    const { data, error } = await supabase
+    .from('posts')
+    .insert(post)
+    .select()
+
+    if (error) {
+      console.error(error)
+    } else {
+        console.log(data)
+        setLoading(false)
+        navigate('/gallery')
+    }
+  }
+
+  return (
+    <div className='create-post-container'>
+        <h1 className='create-post-title'>Create a Post</h1>
+        {!loading && (
+        <form onSubmit={handleSubmit}>
+            <input type="text" placeholder="Title" value={post.title} onChange={(e) => setPost({ ...post, title: e.target.value })} />
+            <input type="text" placeholder="Project Title" value={post.project_title} onChange={(e) => setPost({ ...post, project_title: e.target.value })} />
+            <input type="text" placeholder="Release Year" value={post.release_year} onChange={(e) => setPost({ ...post, release_year: e.target.value })} />
+            <input type="text" placeholder="Release Month" value={post.release_month} onChange={(e) => setPost({ ...post, release_month: e.target.value })} />
+            <input type="text" placeholder="Video URL" value={post.video_url} onChange={(e) => setPost({ ...post, video_url: e.target.value })} />
+            <input type="text" placeholder="Image URL" value={post.img_url} onChange={(e) => setPost({ ...post, img_url: e.target.value })} />
+            <input type="text" placeholder="Content" value={post.content} onChange={(e) => setPost({ ...post, content: e.target.value })} />
+            <ColorSlider 
+            name="background_color" 
+            label="Background Color"
+            post={post}
+            color={post.background_color}
+            setPost={setPost}
+            />
+            <ColorSlider 
+            name="text_color" 
+            label="Text Color"
+            post={post}
+            color={post.text_color}
+            setPost={setPost}
+            />
+            <ExampleColorCard backgroundColor={post.background_color} textColor={post.text_color} />
+            <button type="submit" className='create-post-button'>Create Post</button>
+        </form>
+        )}
+        {loading && <Loading />}
+    </div>
+  )
+}
+
+export default CreatePost
