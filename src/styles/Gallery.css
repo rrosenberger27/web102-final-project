@@ -30,7 +30,7 @@
 }
 
 .search-container input {
-  width: 50%;
+  width: 40%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -47,7 +47,7 @@
 }
 
 .search-container select {
-  width: 30%;
+  width: 40%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 10px;

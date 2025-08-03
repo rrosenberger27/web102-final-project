@@ -4,7 +4,7 @@ import "../styles/Gallery.css";
 import Loading from "../components/Loading";
 import { useState, useEffect, useMemo } from "react";
 
-const Gallery = ({ posts, loading, error }) => {
+const Gallery = ({ posts, loading, error, fetchPosts }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState("Any");
   const [rankBy, setRankBy] = useState("Popularity");
@@ -59,7 +59,10 @@ const Gallery = ({ posts, loading, error }) => {
             </select>
             <div className="sort-container">
               <label>Sort by:</label>
-              <select value={rankBy} onChange={(e) => setRankBy(e.target.value)}>   
+              <select
+                value={rankBy}
+                onChange={(e) => setRankBy(e.target.value)}
+              >
                 <option value="Popularity">Popularity</option>
                 <option value="Newest">Newest</option>
                 <option value="Oldest">Oldest</option>
@@ -68,7 +71,11 @@ const Gallery = ({ posts, loading, error }) => {
           </div>
 
           {displayPosts.map((displayPost) => (
-            <GalleryPost key={displayPost.id} post={displayPost} />
+            <GalleryPost
+              key={displayPost.id}
+              post={displayPost}
+              fetchPosts={fetchPosts}
+            />
           ))}
         </div>
       )}

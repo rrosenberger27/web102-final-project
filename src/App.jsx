@@ -16,8 +16,10 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchPosts = useCallback(async () => {
-    setLoading(true);
+  const fetchPosts = useCallback(async (upvoteUpdate) => {
+    if (!upvoteUpdate) {
+      setLoading(true);
+    }
     const { data, error } = await supabase.from("posts").select("*");
     if (error) {
       console.error("Error fetching posts:", error);
@@ -30,7 +32,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetchPosts();
+    fetchPosts(false);
   }, [fetchPosts]);
 
   return (
@@ -45,7 +47,7 @@ function App() {
         <Route path="/edit/:id" element={<EditPost />} />
         <Route
           path="/gallery"
-          element={<Gallery posts={posts} loading={loading} error={error} />}
+          element={<Gallery posts={posts} loading={loading} error={error} fetchPosts={fetchPosts} />}
         />
         <Route path="/view/:id" element={<ViewPost />} />
       </Routes>
