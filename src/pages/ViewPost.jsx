@@ -4,9 +4,8 @@ import { supabase } from "../client";
 import Loading from "../components/Loading";
 import "../styles/ViewPost.css";
 
-// created_at, img_url, video_url, title, project_title, release_year,release_month, upvotes, category, content
 
-const ViewPost = () => {
+const ViewPost = ({fetchPosts}) => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -64,18 +63,20 @@ const ViewPost = () => {
       console.error("Error upvoting post", error);
     } else {
       setUpvotes(upvotes + 1);
-      fetchPost(true);
     }
   };
 
   const deletePost = async (e) => {
     e.preventDefault();
-    const { error } = await supabase.from("posts").delete().eq("id", id);
-    if (error) {
-      setError(error);
-      console.error("Error deleting post", error);
-    } else {
-      navigate("/gallery");
+    if (window.confirm("Are you sure you want to delete this post?")) {
+      const { error } = await supabase.from("posts").delete().eq("id", id);
+      if (error) {
+        setError(error);
+        console.error("Error deleting post", error);
+      } else {
+        navigate("/gallery");
+        fetchPosts(false)
+      }
     }
   };
 
@@ -146,11 +147,9 @@ const ViewPost = () => {
                 />
               )}
               {post.video_url && (
-                <video
-                  src={post.video_url}
-                  alt={post.title}
-                  className="view-post-video"
-                />
+                <a className="video-url" href={post.video_url} style={{color: post.text_color}}>
+                  TRAILER/CLIP/VIDEO LINK
+                </a>
               )}
               {post.category && (
                 <p className="view-post-category">
@@ -171,15 +170,16 @@ const ViewPost = () => {
               )}
 
               {post.content && (
+                <>
+                <p className="view-post-content-header">
+                  Thoughts:
+                </p>
                 <p
                   className="view-post-content"
-                  style={{
-                    backgroundColor: post.text_color,
-                    color: post.background_color,
-                  }}
                 >
                   {post.content}
-                </p>
+                  </p>
+                </>   
               )}
               <p className="view-post-upvotes">Upvotes: {upvotes}</p>
               <button

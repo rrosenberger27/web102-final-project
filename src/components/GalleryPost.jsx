@@ -23,9 +23,12 @@ const GalleryPost = ({ post, fetchPosts }) => {
   return (
     <div className='gallery-post' style={{ backgroundColor: post.background_color, color: post.text_color }} onClick={() => navigate(`/view/${post.id}`)}>
       <h1>{post.title}</h1>
-      <p>Created: {new Date(post.created_at).toLocaleDateString()}</p>
+      <p>Created: {new Date(post.created_at).toLocaleString()}</p>
       <p>Upvotes: {upvotes}</p>
-     <button className='upvote-button-gallery' style={{ backgroundColor: post.text_color, color: post.background_color }} onClick={handleUpvote}>⬆️</button>
+     <button className='upvote-button-gallery' style={{ backgroundColor: post.text_color, color: post.background_color }} onClick={e => {
+        e.stopPropagation()
+        handleUpvote();
+     } }>⬆️</button>
     </div>
   )
 }

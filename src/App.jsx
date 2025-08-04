@@ -44,12 +44,12 @@ function App() {
           path="/create"
           element={<CreatePost onPostCreated={fetchPosts} />}
         />
-        <Route path="/edit/:id" element={<EditPost />} />
+        <Route path="/edit/:id" element={<EditPost onPostCreated={fetchPosts} />} />
         <Route
           path="/gallery"
           element={<Gallery posts={posts} loading={loading} error={error} fetchPosts={fetchPosts} />}
         />
-        <Route path="/view/:id" element={<ViewPost />} />
+        <Route path="/view/:id" element={<ViewPost fetchPosts={fetchPosts} />} />
       </Routes>
     </>
   );

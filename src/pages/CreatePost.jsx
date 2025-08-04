@@ -68,6 +68,7 @@ const CreatePost = ({ onPostCreated }) => {
             type="text"
             placeholder="Movie/Show Title"
             value={post.project_title}
+            maxLength={100}
             onChange={(e) =>
               setPost({ ...post, project_title: e.target.value })
             }
@@ -75,12 +76,14 @@ const CreatePost = ({ onPostCreated }) => {
           <input
             type="text"
             placeholder="Release Year"
+            maxLength={4}
             value={post.release_year}
             onChange={(e) => setPost({ ...post, release_year: e.target.value })}
           />
           <input
             type="text"
             placeholder="Release Month"
+            maxLength={20}
             value={post.release_month}
             onChange={(e) =>
               setPost({ ...post, release_month: e.target.value })
@@ -89,6 +92,7 @@ const CreatePost = ({ onPostCreated }) => {
           <input
             type="text"
             placeholder="Video URL"
+            maxLength={500}
             value={post.video_url}
             onChange={(e) => setPost({ ...post, video_url: e.target.value })}
           />
@@ -96,12 +100,15 @@ const CreatePost = ({ onPostCreated }) => {
             type="text"
             placeholder="Image URL"
             value={post.img_url}
+            maxLength={500}
             onChange={(e) => setPost({ ...post, img_url: e.target.value })}
           />
-          <input
+          <textarea
             type="text"
             placeholder="Content"
             value={post.content}
+            maxLength={500}
+            rows="4"
             onChange={(e) => setPost({ ...post, content: e.target.value })}
           />
           <select className="create-post-category" value={post.category} onChange={(e) => setPost({ ...post, category: e.target.value })}>
