@@ -115,7 +115,11 @@ const ViewPost = ({fetchPosts}) => {
               <button
                 className="gallery-button"
                 style={{ backgroundColor: post.text_color }}
-                onClick={() => navigate("/gallery")}
+                onClick={() =>
+                  { 
+                    fetchPosts(false)
+                    navigate("/gallery")
+                  }}
               >
                 ⬅️
               </button>

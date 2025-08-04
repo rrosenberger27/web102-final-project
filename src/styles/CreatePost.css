@@ -5,11 +5,17 @@
     justify-content: center;
 }
 
+.create-post-subheading {
+    color: #ecf0f1;
+    font-size: 1.2rem;
+    margin-top: -10px;
+}
+
 .create-post-container .create-post-title { 
     font-size: 2rem;
     font-weight: bold;
     padding-top: 20px;
-    color: #ffffff;
+    color: #ecf0f1;
 }
 
 .create-post-container form {

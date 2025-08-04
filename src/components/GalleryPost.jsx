@@ -27,7 +27,7 @@ const GalleryPost = ({ post, fetchPosts }) => {
       <p>Upvotes: {upvotes}</p>
      <button className='upvote-button-gallery' style={{ backgroundColor: post.text_color, color: post.background_color }} onClick={e => {
         e.stopPropagation()
-        handleUpvote();
+        handleUpvote(); 
      } }>⬆️</button>
     </div>
   )

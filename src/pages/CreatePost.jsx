@@ -56,6 +56,7 @@ const CreatePost = ({ onPostCreated }) => {
   return (
     <div className="create-post-container">
       <h1 className="create-post-title">Create a Post</h1>
+      <p className="create-post-subheading"> Note: Only title and project title must be filled in</p>
       {!loading && (
         <form onSubmit={handleSubmit}>
           <input
