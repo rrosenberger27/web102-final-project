@@ -31,6 +31,11 @@ const CreatePost = ({ onPostCreated }) => {
       return;
     }
 
+    if (post.release_month && !post.release_year) {
+      alert("Release month cannot be filled in without a release year.");
+      return;
+    }
+
     setLoading(true);
 
     const { data, error } = await supabase.from("posts").insert(post).select();
